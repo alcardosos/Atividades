@@ -1,0 +1,32 @@
+Inferno das dependências é uma designação dada a complicações ao lidar com pacotes de 
+software. Atualmente, esse problema vem se tornando cada vez mais raro, no entanto, ele 
+pode ocorrer ao atualizar distribuições na instalação de pacotes onde o usuário não tem 
+controle sobre o processo de criação deste, como é o caso do software proprietário, ou com 
+programas que usam seu próprio instalador e ignoram o sistema de pacotes.
+No caso Jarbas esse fato ocorreu quando tentaram rodar um comando que popula o banco 
+com os dados dos reembolsos, que era utilizado frequentemente e nesse momento o mesmo 
+não funcionou, onde duas coisas acabaram por chamar a atenção naquele momento. Uma era 
+que nenhuma alteração havia sido feita naquele comando ou em algo em que aquele comando 
+dependesse nos últimos pull requests aceitos. O outro ponto era que o traceback mostrava 
+que o erro acontecia exatamente a linha que usava uma função de uma biblioteca externa.
+
+Após investigar, ficou claro que o que quebrou o código deles foi algo externo do projeto, que 
+mostrou que o reprint que havia mudado parte do código da função que eles estavam 
+utilizando. À partir daí, reinstalar a versão anterior do pacote e tentar rodar novamente o 
+comando era o jeito mais fácil de testar e confirmar a teoria. Feito isso, confirmaram as 
+suspeitas de que uma versão era o que estava quebrando o Jarbas.
+
+Eles faziam uso do PyUP para manter a lista de dependências atualizadas automaticamente. 
+Ele lê o arquivo e checa se as bibliotecas ali listadas estão na sua versão mais recente. Caso 
+não estejam, o PyUP abre um pull request no repositório com a atualização das versões do 
+arquivo. Um serviço semelhante ao Libraries.io, David, requires.io, dentre muitos outros. 
+Sendo muito úteis no controle de versão, dentro do gerenciamento de software.
+
+O fato de terem usado o versionamento semântico, fez com que eles passassem a transformar 
+todo aquele volume de dados e dividi-los em várias versões, facilitando o controle e divisão de 
+informações, facilitando também as buscas e consultas de trabalhos realizados anteriormente, 
+mesmo que até já fora de utilização. Tornou muito mais fácil voltar a usar uma versão anterior 
+onde não ocorria o problema, para assim, serem capazes de focar diretamente no problema 
+que ocasionou o problema na nova versão, facilitando o tratamento e não prejudicando todo o 
+trabalho já realizado anteriormente, tendo sempre uma versão 100% servindo como base, 
+para as próximas que possam vir 
